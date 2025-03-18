@@ -7,4 +7,4 @@ const client = new Client({ intents: [Object.keys(GatewayIntentBits)] });
 
 eventHandler(client);
 
-client.login(config.env.botToken);
+client.login(config.botToken);

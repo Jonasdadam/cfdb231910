@@ -1,14 +1,14 @@
-require("dotenv").config();
+const mysql = require('mysql2/promise');
+const config = require('../configs/config');
 
-const mysql = require("mysql");
+async function getConnection() {
+    try {
+        const connection = await mysql.createConnection(config.database);
+        return connection;
+    } catch (error) {
+        console.error('Database-verbinding mislukt:', error);
+        throw error;
+    }
+}
 
-const connection = mysql.createPool({
-  host: process.env.DBhost,
-  user: process.env.DBuser,
-  password: process.env.DBpassword,
-  database: process.env.DBname,
-});
-
-
-
-module.exports = connection;
+module.exports = { getConnection };

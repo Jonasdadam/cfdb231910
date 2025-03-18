@@ -2,17 +2,19 @@ require("dotenv/config");
 
 module.exports = {
 
-  env: {
-    botToken: process.env.BotToken,
-    mysqlHost: process.env.DBhost,
-    mysqlUser: process.env.DBuser,
-    mysqlPassword: process.env.DBpassword,
-    mysqlDatabase: process.env.DBname,
+  botToken: process.env.BotToken,
+
+  database: {
+    host: process.env.DBhost,
+    user: process.env.DBuser,
+    password: process.env.DBpassword,
+    database: process.env.DBname,
   },
 
   developement: {
     devServerID: "1198380562352717914",
-    developersID: ["337696854642917376"]
+    developersID: ["337696854642917376"],
+    mysqlNotifierChannelID: "1273690835925336169"
   },
 
   logs: {
