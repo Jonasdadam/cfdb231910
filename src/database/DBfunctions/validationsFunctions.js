@@ -1,15 +1,22 @@
-const { getConnection } = require('../connect');
+/*Used in:
+    > events/validations/buttonValidator.js
+    > events/validations/chatInputCommandValidator.js
+    > events/validations/contextMenuCommandValidator.js
+    > events/validations/ModalCommandValidator.js
+    > events/validations/selectMenuValidator.js
+*/
+const db = require('../connect');
 
-async function GetAllowedUsers() {
-    try {
-        const db = await getConnection(); // Haal een nieuwe connectie op
-        const [results] = await db.execute("SELECT * FROM member_accounts"); // ✅ Gebruik `execute()` in plaats van `query()`
-        await db.end(); // Sluit de connectie
-        return results;
-    } catch (error) {
-        console.error('Fout bij ophalen van toegestane gebruikers:', error);
-        throw error;
-    }
+exports.GetAllowedUsers = async function () {
+    return new Promise((resolve, reject) => {
+
+        db.query(`SELECT Discord_ID FROM member_accounts WHERE Active_Member = 'true';`, function (err, result) {
+            if (err) {
+                console.error(err)
+                reject(err)
+            }
+
+            resolve(result)
+        })
+    })
 }
-
-module.exports = { GetAllowedUsers };

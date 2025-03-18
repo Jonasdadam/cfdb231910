@@ -1,2 +1,0 @@
-# CrimiDiscordBot
-CrimiDiscordBot
