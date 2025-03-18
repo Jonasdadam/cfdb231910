@@ -1,5 +1,5 @@
 const mysql = require('mysql2/promise');
-const config = require('../configs/config');
+const config = require('../config');
 
 async function getConnection() {
     try {
