@@ -1,12 +1,15 @@
-const { client } = require('../index');
 const config = require('../configs/config');
 
 async function sendToDevChannel(message) {
     try {
-        const channel = await client.channels.fetch(config.devChannelId);
-        await channel.send(message);
+        const channel = await client.channels.fetch(config.developement.mysqlNotifierChannelID);
+        if (channel) {
+            await channel.send(message);
+        } else {
+            console.error('Ontwikkelaarskanaal niet gevonden.');
+        }
     } catch (error) {
-        console.error('Fout bij het verzenden van bericht naar ontwikkelaarskanaal:', error);
+        console.error('Fout bij het verzenden van bericht naar ontwikkelaarskanaal:', error.message);
     }
 }
 
